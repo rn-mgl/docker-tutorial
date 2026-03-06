@@ -4,7 +4,12 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN npm install
+ARG NODE_ENV
+
+RUN if [ "$NODE_ENV" = "development" ]; \
+    then npm install; \
+    else npm install --omit=dev; \
+    fi
 
 COPY . .
 
@@ -12,4 +17,4 @@ ENV PORT=8000
 
 EXPOSE $PORT
 
-CMD ["npm", "run", "dev"]
+CMD ["node", "src/server.js"]
