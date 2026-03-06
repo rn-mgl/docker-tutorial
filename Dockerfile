@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-ENV PORT=9000
+ENV PORT=8000
 
 EXPOSE $PORT
 
