@@ -10,3 +10,6 @@ services:
 
   database:
     image: mysql:9
+
+  redis:
+    image: redis:8
