@@ -1,9 +1,19 @@
 import express from "express";
+import { createConnection } from "./database/connection.js";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  return res.json({ message: "Hello", success: true, object: "test" });
+const db = await createConnection();
+
+app.get("/", async (req, res) => {
+  const [result, fields] = await db.execute(`SELECT * FROM users;`);
+
+  return res.json({
+    message: "Hello",
+    success: true,
+    object: "test",
+    users: result,
+  });
 });
 
 app.use(express.json());

@@ -7,6 +7,19 @@ services:
     volumes:
       - ./:/app:ro
       - /app/node_modules
+    env_file:
+      - .env
     environment:
       - NODE_ENV=development
     command: npm run dev
+
+  database:
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  mysql:
