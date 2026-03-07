@@ -5,8 +5,12 @@ const app = express();
 
 const db = await createConnection();
 
+app.set("trust proxy", true);
+
 app.get("/", async (req, res) => {
   const [result, fields] = await db.execute(`SELECT * FROM users;`);
+
+  console.log("request made");
 
   return res.json({
     message: "Hello",
