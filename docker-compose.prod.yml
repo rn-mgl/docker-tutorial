@@ -7,6 +7,13 @@ services:
     environment:
       - NODE_ENV=production
     command: node src/server.js
+    deploy:
+      replicas: 8
+      restart_policy:
+        condition: app
+      update_config:
+        parallelism: 2
+        delay: 15s
 
   nginx:
     ports:

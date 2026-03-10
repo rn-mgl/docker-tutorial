@@ -1,5 +1,6 @@
 services:
   node-app:
+    image: rnmgl/node-app
     build:
       context: .
       args:
@@ -12,6 +13,13 @@ services:
     environment:
       - NODE_ENV=development
     command: npm run dev
+    deploy:
+      replicas: 8
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 2
+        delay: 15s
 
   nginx:
     ports:
